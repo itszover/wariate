@@ -26,38 +26,38 @@ public class LetterController {
         this.letterRepository = letterRepository;
     }
 
-    @GetMapping("")
-    List<Letter> findAll() {
-        return letterRepository.findAll();
-    }
+    // @GetMapping("")
+    // List<Letter> findAll() {
+    //     return letterRepository.findAll();
+    // }
 
-    @GetMapping("/{id}")
-    Letter findById(@PathVariable Integer id) {
+    // @GetMapping("/{id}")
+    // Letter findById(@PathVariable Integer id) {
 
-        Optional<Letter> letter = letterRepository.findById(id);
+    //     Optional<Letter> letter = letterRepository.findById(id);
 
-        if (letter.isEmpty()) {
-            throw new LetterNotFoundException();
-        }
+    //     if (letter.isEmpty()) {
+    //         throw new LetterNotFoundException();
+    //     }
         
-        return letter.get();
-    }
+    //     return letter.get();
+    // }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
-    void create(@Valid @RequestBody Letter letter) {
-        letterRepository.create(letter);
-    }
+    // @ResponseStatus(HttpStatus.CREATED)
+    // @PostMapping("")
+    // void create(@Valid @RequestBody Letter letter) {
+    //     letterRepository.create(letter);
+    // }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("")
-    void update(@Valid @RequestBody Letter letter) {
-        letterRepository.update(letter);
-    }
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
+    // @PutMapping("")
+    // void update(@Valid @RequestBody Letter letter) {
+    //     letterRepository.update(letter);
+    // }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id) {
-        letterRepository.delete(id);
-    }
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
+    // @DeleteMapping("/{id}")
+    // void delete(@PathVariable Integer id) {
+    //     letterRepository.delete(id);
+    // }
 }

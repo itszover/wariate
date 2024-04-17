@@ -5,55 +5,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
-
-import jakarta.annotation.PostConstruct;
 
 @Repository
 public class LetterRepository {
 
-    private List<Letter> letters = new ArrayList<>();
+    private static final Logger log = LoggerFactory.getLogger(LetterRepository.class);
+    private final JdbcClient jdbcClient;
 
-    List<Letter> findAll() {
-        return letters;
+    public LetterRepository(JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
+    // private List<Letter> letters = new ArrayList<>();
 
-    Optional<Letter> findById(int id) {
-        return letters.stream()
-                .filter(letter -> letter.id() == id)
-                .findFirst();
-    }
+    // List<Letter> findAll() {
+    //     return letters;
+    // }
 
-    void create(Letter letter) {
-        letters.add(letter);
-    }
+    // Optional<Letter> findById(int id) {
+    //     return letters.stream()
+    //             .filter(letter -> letter.id() == id)
+    //             .findFirst();
+    // }
 
-    void update(Letter letter) {
-        Optional<Letter> existingLetter = findById(letter.id());
+    // void create(Letter letter) {
+    //     letters.add(letter);
+    // }
 
-        if (existingLetter.isPresent()) {
-            letters.set(letters.indexOf(existingLetter.get()), letter);    
-        }
-    }
+    // void update(Letter letter) {
+    //     Optional<Letter> existingLetter = findById(letter.id());
 
-    void delete(Integer id) {
-        letters.removeIf(letters -> letters.id().equals(id));
-    }
+    //     if (existingLetter.isPresent()) {
+    //         letters.set(letters.indexOf(existingLetter.get()), letter);    
+    //     }
+    // }
 
-    @PostConstruct
-    private void init() {
-        letters.add(new Letter(
-                1,
-                "Alice",
-                "Bob",
-                "Hello, Bob!",
-                LocalDateTime.now()));
+    // void delete(Integer id) {
+    //     letters.removeIf(letters -> letters.id().equals(id));
+    // }
 
-        letters.add(new Letter(
-                2,
-                "Bob",
-                "Alice",
-                "Hi, Alice!",
-                LocalDateTime.now()));
-    }
+    // @PostConstruct
+    // private void init() {
+    //     letters.add(new Letter(
+    //             1,
+    //             "Alice",
+    //             "Bob",
+    //             "Hello, Bob!",
+    //             LocalDateTime.now()));
+
+    //     letters.add(new Letter(
+    //             2,
+    //             "Bob",
+    //             "Alice",
+    //             "Hi, Alice!",
+    //             LocalDateTime.now()));
+    // }
 }
