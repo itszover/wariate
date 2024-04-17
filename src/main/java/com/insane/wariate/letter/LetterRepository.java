@@ -28,6 +28,18 @@ public class LetterRepository {
         letters.add(letter);
     }
 
+    void update(Letter letter) {
+        Optional<Letter> existingLetter = findById(letter.id());
+
+        if (existingLetter.isPresent()) {
+            letters.set(letters.indexOf(existingLetter.get()), letter);    
+        }
+    }
+
+    void delete(Integer id) {
+        letters.removeIf(letters -> letters.id().equals(id));
+    }
+
     @PostConstruct
     private void init() {
         letters.add(new Letter(
